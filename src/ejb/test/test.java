@@ -1,26 +1,35 @@
 package ejb.test;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import safe.beans.NewSessionBean;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import safe.beans.ReomoteBeanRemote;
+import javax.naming.*;
 
 public class test {
 
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String[] args)  {
-        // TODO code application logic heres
-         
-       try {
-            NewSessionBean remote = (NewSessionBean) new InitialContext().lookup("java:global/SafeLoginID/NewSessionBean");
-           System.out.println("*********************************************************8");
-            String num = remote.pruebaEJB();
-            System.out.println(num);
-            //LOGGER.log(Level.INFO, "factorial de {0}={1}", new Object[]{base, num});
-        } catch (NamingException ex) {
-            //LOGGER.log(Level.SEVERE, null, ex);
+        try {
+            System.out.println("1**********************************************************1");
+            
+            InitialContext ic=new InitialContext();
+            System.out.println("2**********************************************************1");
+            
+            ReomoteBeanRemote bean = (ReomoteBeanRemote) ic.lookup("safe.beans.ReomoteBeanRemote");
+            System.out.println("3**********************************************************1");
+            
+            System.out.println(bean.Listausuarios());
+        } catch (Exception ex) {
+            Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
+            
+        
+        
+        
         
     }
     
