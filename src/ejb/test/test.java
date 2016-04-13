@@ -1,9 +1,13 @@
 package ejb.test;
 
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import safe.beans.ReomoteBeanRemote;
-import javax.naming.*;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import safe.beans.InterfaceBaseDeDatos;
+
+
 
 public class test {
 
@@ -13,24 +17,20 @@ public class test {
     
     public static void main(String[] args)  {
         try {
-            System.out.println("1**********************************************************1");
+            Properties prop= new Properties();
+            prop.setProperty("org.omg.CORBA.ORBInitialHost","localhost");
+            prop.setProperty("org.omg.CORBA.ORBInitialPort","3700");
+
+            InitialContext inc= new InitialContext(prop);
             
-            InitialContext ic=new InitialContext();
-            System.out.println("2**********************************************************1");
+            InterfaceBaseDeDatos bean = (InterfaceBaseDeDatos) inc.lookup("java:global/SafeLoginID/SessionBeanBaseDeDatos");
+            System.out.println(bean.LlamadoBaseAprocLog());
             
-            ReomoteBeanRemote bean = (ReomoteBeanRemote) ic.lookup("safe.beans.ReomoteBeanRemote");
-            System.out.println("3**********************************************************1");
-            
-            System.out.println(bean.Listausuarios());
-        } catch (Exception ex) {
+        } catch (NamingException ex) {
             Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
         }
             
-            
-        
-        
-        
-        
-    }
+
     
+    }
 }
