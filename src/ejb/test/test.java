@@ -24,6 +24,7 @@ public class test {
             InitialContext inc= new InitialContext(prop);
             
             InterfaceBaseDeDatos bean = (InterfaceBaseDeDatos) inc.lookup("java:global/SafeLoginID/SessionBeanBaseDeDatos");
+            //System.out.println(bean.insertarUsuario());
             System.out.println(bean.LlamadoBaseAprocLog());
             
         } catch (NamingException ex) {
